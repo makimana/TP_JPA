@@ -1,6 +1,8 @@
 package domain;
 
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -55,6 +57,7 @@ import java.util.List;
             this.mail = mail;
         }
         @OneToMany(mappedBy= "self")
+        @JsonIgnore
         public List<Residence> getResidences() {
 
             return residences;
@@ -64,6 +67,7 @@ import java.util.List;
             this.residences = residences;
         }
         @OneToMany(mappedBy= "p")
+        @JsonIgnore
         public List<Equipement> getEquipements() {
 
             return this.equipements;
@@ -73,6 +77,7 @@ import java.util.List;
             this.equipements = equipements;
         }
         @ManyToMany
+        @JsonIgnore
         public List<Personne> getAmis(){
             return this.amis;
         }

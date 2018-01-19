@@ -8,30 +8,22 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import antlr.collections.List;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
-    @Entity
+@Entity
 
-    public class Chauffage {
-        private long id;
+    public class Chauffage extends IntelligentPeripherik {
         private Residence residence;
+        private String power;
 
 
         public Chauffage(){
 
             super();
         }
-        @Id
-        @GeneratedValue
-        public long getId() {
 
-            return id;
-        }
-
-        public void setId(long id) {
-
-            this.id = id;
-        }
         @ManyToOne
+        @JsonIgnore
         public Residence getResidence(){
 
             return this.residence;
@@ -39,6 +31,13 @@ import antlr.collections.List;
         public void setResidence(Residence residence){
             this.residence = residence;
 
+        }
+        public String getPower() {
+            return power;
+        }
+
+        public void setPower(String power) {
+            this.power = power;
         }
 
 

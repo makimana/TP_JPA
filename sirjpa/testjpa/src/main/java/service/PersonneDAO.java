@@ -1,6 +1,7 @@
 package service;
 
 import domain.Personne;
+import jpa.EntityManagerHelper;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -8,33 +9,27 @@ import javax.persistence.EntityTransaction;
 public class PersonneDAO implements GenericDAO<Personne,Long>{
 
 
-    EntityManager manager;
-
-
-    public PersonneDAO(EntityManager m ){
-        this.manager= m;
-    }
-
 
     @Override
     public Personne create(Personne personne) {
-       EntityTransaction t = manager.getTransaction();
+       EntityTransaction t = EntityManagerHelper.getEntityManager().getTransaction();
        t.begin();
-        manager.persist(personne);
+        EntityManagerHelper.getEntityManager().persist(personne);
         t.commit();
         return  personne;
     }
 
     @Override
     public Personne read(Long id) {
-        return  manager.find(Personne.class, id);
+
+        return  EntityManagerHelper.getEntityManager().find(Personne.class, id);
     }
 
     @Override
     public Personne update(Personne personne) {
-        EntityTransaction t = manager.getTransaction();
+        EntityTransaction t = EntityManagerHelper.getEntityManager().getTransaction();
         t.begin();
-        manager.merge(personne);
+        EntityManagerHelper.getEntityManager().merge(personne);
         t.commit();
         return  personne;
     }
@@ -42,9 +37,9 @@ public class PersonneDAO implements GenericDAO<Personne,Long>{
 
     @Override
     public void delete(Personne personne) {
-        EntityTransaction t = manager.getTransaction();
+        EntityTransaction t = EntityManagerHelper.getEntityManager().getTransaction();
         t.begin();
-        manager.remove(personne);
+        EntityManagerHelper.getEntityManager().remove(personne);
         t.commit();
 
     }

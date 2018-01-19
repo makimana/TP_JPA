@@ -1,4 +1,6 @@
 package domain;
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.GeneratedValue;
@@ -6,8 +8,7 @@ import javax.persistence.Id;
 
 
     @Entity
-    public class Equipement {
-        private long id;
+    public class Equipement extends IntelligentPeripherik {
         private int watts;
         private Personne p;
 
@@ -27,16 +28,8 @@ import javax.persistence.Id;
         }
 
 
-        @Id
-        @GeneratedValue
-        public long getId() {
-            return id;
-        }
-
-        public void setId(long id) {
-            this.id = id;
-        }
         @ManyToOne
+        @JsonIgnore
         public Personne getP(){
 
             return p;

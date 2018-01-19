@@ -1,5 +1,7 @@
 package domain;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -57,17 +59,21 @@ import java.util.List;
             this.nb_pieces= nb_pieces;
         }
         @ManyToOne
+        @JsonIgnore
         public Personne getSelf(){
             return this.self;
         }
 
         @Transient
+        @JsonIgnore
         public List <Equipement> getResidenceEquipements() {
             return this.self.getEquipements();
         }
 
         @Transient
+        @JsonIgnore
         public void setResidenceEquipements(Equipement equipements) {
+
             this.self.getEquipements().add(equipements);
         }
 
@@ -85,7 +91,10 @@ import java.util.List;
             this.chauffage = chauffage;
         }
 
+        public void addChauffage(Chauffage ch1) {
+            chauffage.add(ch1);
 
+        }
     }
 
 
